@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="login.css">
+    <!-- Agrega tus enlaces a hojas de estilo CSS aquí -->
+</head>
+<body>
+    <header>
+        <h1>Iniciar Sesión</h1>
+        <!-- Agrega el menú de navegación o enlaces aquí -->
+    </header>
+    
+    <main>
+        <section>
+            <h2>Formulario de Inicio de Sesión</h2>
+            <form id="login-form">
+                {% csrf_token %} <!-- Esto es para proteger contra ataques CSRF en Django -->
+                <label for="username">Nombre de Usuario:</label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <button type="button" onclick="window.location.href = 'piezas.html'">Iniciar Sesión</button>
+
+
+                
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Plataforma de Piezas de Ensamble</p>
+    </footer>
+
+    <!-- Agrega la referencia a jQuery si lo estás utilizando -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="login.j"></script> <!-- Archivo JS para manejar el inicio de sesión -->
+</body>
+</html>
+

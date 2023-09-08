@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar y Editar Piezas</title>
+    <link rel="stylesheet" href="style.css"> <!-- Enlaza tu hoja de estilos CSS externa aquí -->
+</head>
+<body>
+    <header>
+        <h1>Administrador, editar o cambiar PIEZAS</h1>
+        <!-- Agrega el menú de navegación o enlaces aquí -->
+    </header>
+    
+    <main>
+        <section>
+            <h2>Listado de Piezas</h2>
+            <ul>
+                <li>
+                    <h3>Nombre de la Pieza 1</h3>
+                    <p>Descripción de la Pieza 1.</p>
+                    <a href="#">Enlace a la Pieza 1</a>
+                    <!-- Agregar imagen para la Pieza 1 -->
+                    <img src="https://img.interempresas.net/fotos/1634297.jpeg" alt="Imagen de la Pieza 1">
+                    <!-- Agregar botón "Editar" que activa la edición -->
+                    <button class="editar-button" data-nombre="Nombre de la Pieza 1" data-descripcion="Descripción de la Pieza 1" data-enlace="#">Editar</button>
+                </li>
+                <li>
+                    <h3>Nombre de la Pieza 2</h3>
+                    <p>Descripción de la Pieza 2.</p>
+                    <a href="#">Enlace a la Pieza 2</a>
+                    <!-- Agregar imagen para la Pieza 2 -->
+                    <img src="https://www.motoressiemens.com/images/motores-siemens-para-bombas-1lf3.jpg" alt="Imagen de la Pieza 2">
+                    <!-- Agregar botón "Editar" que activa la edición -->
+                    <button class="editar-button" data-nombre="Nombre de la Pieza 2" data-descripcion="Descripción de la Pieza 2" data-enlace="#">Editar</button>
+                </li>
+                <!-- Repetir esta estructura para cada pieza -->
+            </ul>
+        </section>
+        
+        <!-- Formulario para editar una pieza (vista para administradores) -->
+        <section id="edicion-pieza" style="display: none;">
+            <h2>Editar Pieza</h2>
+            <form action="/editar_pieza" method="post">
+                {% csrf_token %}
+                <input type="hidden" id="pieza-id" name="pieza-id">
+                <label for="nombre_pieza">Nombre:</label>
+                <input type="text" id="nombre_pieza" name="nombre_pieza" required>
+                <br>
+                <label for="descripcion_pieza">Descripción:</label>
+                <textarea id="descripcion_pieza" name="descripcion_pieza" required></textarea>
+                <br>
+                <label for="enlace_pieza">Enlace:</label>
+                <input type="text" id="enlace_pieza" name="enlace_pieza" required>
+                <br>
+                <!-- Agregar campo para URL de imagen -->
+                <label for="imagen_pieza">URL de Imagen:</label>
+                <input type="text" id="imagen_pieza" name="imagen_pieza" required>
+                <br>
+                <button type="submit">Guardar Cambios</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Plataforma de Piezas de Ensamble</p>
+    </footer>
+    
+    <!-- Agregar JavaScript para manejar la edición -->
+    <script>
+        const editarButtons = document.querySelectorAll(".editar-button");
+        const edicionPieza = document.getElementById("edicion-pieza");
+        const nombrePiezaInput = document.getElementById("nombre_pieza");
+        const descripcionPiezaInput = document.getElementById("descripcion_pieza");
+        const enlacePiezaInput = document.getElementById("enlace_pieza");
+        const imagenPiezaInput = document.getElementById("imagen_pieza");
+        const piezaIdInput = document.getElementById("pieza-id");
+        
+        editarButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const nombre = button.getAttribute("data-nombre");
+                const descripcion = button.getAttribute("data-descripcion");
+                const enlace = button.getAttribute("data-enlace");
+                const imagen = button.getAttribute("data-imagen"); // Obtén la URL de la imagen
+                const id = button.getAttribute("data-id"); // Asigna una identificación única a cada pieza
+                
+                nombrePiezaInput.value = nombre;
+                descripcionPiezaInput.value = descripcion;
+                enlacePiezaInput.value = enlace;
+                imagenPiezaInput.value = imagen; // Rellena el campo de la URL de la imagen
+                piezaIdInput.value = id;
+                
+                edicionPieza.style.display = "block";
+            });
+        });
+    </script>
+</body>
+</html>
